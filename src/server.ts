@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import { mongoConnect } from './database/mongo';
+import user from './user/routes';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ server.use(express.static(path.join(__dirname,'../public')));
 server.use(express.urlencoded({extended: true}));
 server.use(express.json());
 server.use(fileUpload());
+
+server.use(user);
 
 server.use((req: Request, res: Response) =>{
     res.status(404);
